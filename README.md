@@ -199,7 +199,7 @@ git clone URL_DEL_REPOSITORIO
 
 - .env
 
-**Dentro: **
+**Dentro:**
 - SUPABASE_URL=
 - SUPABASE_KEY=
 
