@@ -1,50 +1,35 @@
-import { calcularCostoEnvios }
+import { calcularCostoEnvios } from "../services/calculoCostoService.js";
 
-from "../services/calculoCostoService.js";
+export const reporteEnvios = async (req, res) => {
 
+    try {
 
+        const {
+            fechaInicio,
+            fechaFin
 
-export const reporteEnvios = async(req,res)=>{
+        } = req.query;
 
+        const resultado = await calcularCostoEnvios(
 
-try{
+            fechaInicio,
 
+            fechaFin
 
-const {
-fechaInicio,
-fechaFin
+        );
 
-}=req.query;
+        res.json(resultado);
 
+    } catch (error) {
 
+        res.status(500).json({
 
-const resultado = await calcularCostoEnvios(
+            mensaje: "Error calculando envíos",
 
-fechaInicio,
+            error: error.message
 
-fechaFin
+        });
 
-);
+    }
 
-
-
-res.json(resultado);
-
-
-
-}catch(error){
-
-
-res.status(500).json({
-
-mensaje:"Error calculando envíos",
-
-error:error.message
-
-});
-
-
-}
-
-
-}
+};

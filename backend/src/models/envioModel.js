@@ -1,46 +1,38 @@
 import supabase from "../config/supabase.js";
 
+export const obtenerEnviosPorFecha = async (fechaInicio, fechaFin) => {
 
-export const obtenerEnviosPorFecha = async(fechaInicio, fechaFin)=>{
+    const { data, error } = await supabase
 
+        .from("envios")
 
-const {data,error}= await supabase
+        .select(`
+            id_envio,
+            peso_kg,
+            fecha_envio,
 
-.from("envios")
+            repartidor(
+                id_repartidor,
+                nombre
+            ),
 
-.select(`
-    id_envio,
-    peso_kg,
-    fecha_envio,
+            zonas(
+                id_zona,
+                nombre_zona,
+                tarifa_por_kg
+            )
+        `)
 
-    repartidor(
-        id_repartidor,
-        nombre
-    ),
+        .gte("fecha_envio", fechaInicio)
 
-    zonas(
-        id_zona,
-        nombre_zona,
-        tarifa_por_kg
-    )
+        .lte("fecha_envio", fechaFin);
 
-`)
+    if (error) {
 
-.gte("fecha_envio",fechaInicio)
+        throw error;
 
-.lte("fecha_envio",fechaFin);
+    }
 
+    return data;
 
-
-if(error){
-
-throw error;
-
-}
-
-
-
-return data;
-
-
-}
+};

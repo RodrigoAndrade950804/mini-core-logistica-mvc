@@ -5,274 +5,191 @@ import { ref } from "vue";
 import { obtenerReporte } from "../services/envioService";
 
 import TablaDetalle from "../components/TablaDetalle.vue";
-
 import TablaResumen from "../components/TablaResumen.vue";
 
 
-
 const fechaInicio = ref("");
-
 const fechaFin = ref("");
-
 const detalle = ref([]);
-
 const resumen = ref([]);
-
 const cargando = ref(false);
 
+const buscar = async () => {
 
+    if (!fechaInicio.value || !fechaFin.value) {
 
-const buscar = async()=>{
+        alert("Seleccione ambas fechas");
 
+        return;
 
-if(!fechaInicio.value || !fechaFin.value){
+    }
 
-alert("Seleccione ambas fechas");
+    try {
 
-return;
+        cargando.value = true;
 
-}
+        const respuesta = await obtenerReporte(
 
+            fechaInicio.value,
 
+            fechaFin.value
 
-try{
+        );
 
+        detalle.value = respuesta.detalle;
 
-cargando.value = true;
+        resumen.value = respuesta.resumen;
 
+    } catch (error) {
 
+        console.error(error);
 
-const respuesta = await obtenerReporte(
+        alert("Error consultando información");
 
-fechaInicio.value,
+    } finally {
 
-fechaFin.value
+        cargando.value = false;
 
-);
-
-
-
-detalle.value = respuesta.detalle;
-
-
-resumen.value = respuesta.resumen;
-
-
-
-}
-
-catch(error){
-
-
-console.error(error);
-
-
-alert("Error consultando información");
-
+    }
 
 }
-
-finally{
-
-
-cargando.value = false;
-
-
-}
-
-
-}
-
-
 
 </script>
 
 
-
 <template>
 
+    <div class="min-h-screen bg-gray-100 p-10">
 
-<div class="min-h-screen bg-gray-100 p-10">
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow p-8">
 
+            <h1 class="text-3xl font-bold mb-3">
 
-<div class="max-w-6xl mx-auto bg-white rounded-xl shadow p-8">
+                Mini Core Logística
 
+            </h1>
 
+            <p class="text-gray-600 mb-8">
 
-<h1 class="text-3xl font-bold mb-3">
+                Cálculo de costos de envíos por repartidor según rango de fechas y zona de entrega.
 
-Mini Core Logística
+            </p>
 
-</h1>
+            <!-- FILTRO -->
 
+            <div class="grid grid-cols-3 gap-5 mb-10">
 
-<p class="text-gray-600 mb-8">
+                <div>
 
-Cálculo de costos de envíos por repartidor según rango de fechas y zona de entrega.
+                    <label class="block font-semibold mb-2">
 
-</p>
+                        Fecha Inicio
 
+                    </label>
 
+                    <input
 
+                        type="date"
 
+                        v-model="fechaInicio"
 
-<!-- FILTRO -->
+                        class="border rounded-lg p-2 w-full"
 
-<div class="grid grid-cols-3 gap-5 mb-10">
+                    />
 
+                </div>
 
+                <div>
 
-<div>
+                    <label class="block font-semibold mb-2">
 
+                        Fecha Fin
 
-<label class="block font-semibold mb-2">
+                    </label>
 
-Fecha Inicio
+                    <input
 
-</label>
+                        type="date"
 
+                        v-model="fechaFin"
 
-<input
+                        class="border rounded-lg p-2 w-full"
 
-type="date"
+                    />
 
-v-model="fechaInicio"
+                </div>
 
-class="border rounded-lg p-2 w-full"
+                <div class="flex items-end">
 
-/>
+                    <button
 
+                        @click="buscar"
 
-</div>
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 w-full"
 
+                    >
 
+                        Consultar
 
+                    </button>
 
+                </div>
 
-<div>
+            </div>
 
+            <div
 
-<label class="block font-semibold mb-2">
+                v-if="cargando"
 
-Fecha Fin
+                class="text-center text-gray-500 mb-6"
 
-</label>
+            >
 
+                Consultando información...
 
-<input
+            </div>
 
-type="date"
+            <!-- TABLA DETALLE -->
 
-v-model="fechaFin"
+            <div v-if="detalle.length">
 
-class="border rounded-lg p-2 w-full"
+                <h2 class="text-xl font-bold mb-4">
 
-/>
+                    Detalle de envíos
 
+                </h2>
 
-</div>
+                <TablaDetalle :datos="detalle"/>
 
+            </div>
 
+            <!-- TABLA RESUMEN -->
 
+            <div v-if="resumen.length">
 
+                <h2 class="text-xl font-bold mb-4">
 
-<div class="flex items-end">
+                    Resumen por repartidor
 
+                </h2>
 
-<button
+                <TablaResumen :datos="resumen"/>
 
-@click="buscar"
+            </div>
 
-class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 w-full"
+            <div
 
+                v-if="!detalle.length && !cargando"
 
->
+                class="text-gray-500 text-center mt-8"
 
+            >
+                No existen datos para el rango seleccionado.
 
-Consultar
+            </div>
 
-</button>
+        </div>
 
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-<div v-if="cargando"
-
-class="text-center text-gray-500 mb-6">
-
-
-Consultando información...
-
-
-</div>
-
-
-
-
-
-
-
-<!-- TABLA DETALLE -->
-
-
-<div v-if="detalle.length">
-
-
-<h2 class="text-xl font-bold mb-4">
-
-Detalle de envíos
-
-</h2>
-
-<TablaDetalle :datos="detalle"/>
-
-</div>
-
-
-<!-- TABLA RESUMEN -->
-
-
-<div v-if="resumen.length">
-
-
-<h2 class="text-xl font-bold mb-4">
-
-Resumen por repartidor
-
-</h2>
-
-<TablaResumen :datos="resumen"/>
-
-</div>
-
-
-<div
-
-v-if="!detalle.length && !cargando"
-
-class="text-gray-500 text-center mt-8"
-
->
-
-No existen datos para el rango seleccionado.
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
+    </div>
 
 </template>

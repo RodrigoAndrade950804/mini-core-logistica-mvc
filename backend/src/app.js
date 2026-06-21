@@ -4,28 +4,41 @@ import cors from "cors";
 import { obtenerRepartidores } from "./models/repartidorModel.js";
 import envioRoutes from "./routes/envioRoutes.js";
 
-
 const app = express();
-    
-/*app.use(cors());*/ //Quitamos para deploys
 
-app.use(cors({origin:"*"})); // Permitir solicitudes desde cualquier origen
+// =========================
+// MIDDLEWARES
+// =========================
+
+app.use(cors({
+    origin: "*"
+})); // Permitir solicitudes desde cualquier origen
 
 app.use(express.json());
 
+// =========================
+// ROUTES
+// =========================
+
 app.use("/api/envios", envioRoutes);
 
-app.get("/", (req,res)=>{
+// =========================
+// HEALTH CHECK
+// =========================
+
+app.get("/", (req, res) => {
 
     res.json({
-        mensaje:"API Mini Core Logística funcionando"
+        mensaje: "API Mini Core Logística funcionando"
     });
 
 });
 
+// =========================
+// TEST DATABASE
+// =========================
 
-app.get("/test-db", async(req,res)=>{
-
+app.get("/test-db", async (req, res) => {
 
     try {
 
@@ -33,17 +46,16 @@ app.get("/test-db", async(req,res)=>{
 
         res.json(datos);
 
-
-    } catch(error){
+    } catch (error) {
 
         res.status(500).json({
-            error:error.message
+
+            error: error.message
+
         });
 
     }
 
-
 });
-
 
 export default app;

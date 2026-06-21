@@ -1,132 +1,101 @@
 <script setup>
 
-
 defineProps({
 
-datos:Array
+    datos: Array
 
 })
 
-
 </script>
-
-
-
 
 <template>
 
-
 <table class="w-full border-collapse mb-10">
 
+    <thead>
 
-<thead>
+        <tr class="bg-gray-200">
 
+            <th class="border p-3">
+                Repartidor
+            </th>
 
-<tr class="bg-gray-200">
+            <th class="border p-3">
+                Fecha
+            </th>
 
+            <th class="border p-3">
+                Zona
+            </th>
 
-<th class="border p-3">
-Repartidor
-</th>
+            <th class="border p-3">
+                Peso
+            </th>
 
+            <th class="border p-3">
+                Tarifa/Kg
+            </th>
 
-<th class="border p-3">
-Fecha
-</th>
+            <th class="border p-3">
+                Costo
+            </th>
 
+        </tr>
 
-<th class="border p-3">
-Zona
-</th>
+    </thead>
 
+    <tbody>
 
-<th class="border p-3">
-Peso
-</th>
+        <tr
 
+            v-for="item in datos"
 
-<th class="border p-3">
-Tarifa/Kg
-</th>
+            :key="item.fecha + item.zona"
 
+            class="text-center"
 
-<th class="border p-3">
-Costo
-</th>
+        >
 
+            <td class="border p-3">
 
-</tr>
+                {{ item.repartidor }}
 
+            </td>
 
-</thead>
+            <td class="border p-3">
 
+                {{ item.fecha }}
 
+            </td>
 
+            <td class="border p-3">
 
-<tbody>
+                {{ item.zona }}
 
+            </td>
 
-<tr
+            <td class="border p-3">
 
-v-for="item in datos"
+                {{ item.peso_kg }} kg
 
-:key="item.fecha + item.zona"
+            </td>
 
-class="text-center"
+            <td class="border p-3">
 
+                ${{ item.tarifa_por_kg.toFixed(2) }}
 
->
+            </td>
 
+            <td class="border p-3 font-bold">
 
-<td class="border p-3">
+                ${{ item.costo_envio.toFixed(2) }}
 
-{{item.repartidor}}
+            </td>
 
-</td>
+        </tr>
 
-
-<td class="border p-3">
-
-{{item.fecha}}
-
-</td>
-
-
-<td class="border p-3">
-
-{{item.zona}}
-
-</td>
-
-
-<td class="border p-3">
-
-{{item.peso_kg}} kg
-
-</td>
-
-
-<td class="border p-3">
-
-${{item.tarifa_por_kg.toFixed(2)}}
-
-</td>
-
-
-<td class="border p-3 font-bold">
-
-${{item.costo_envio.toFixed(2)}}
-
-</td>
-
-
-</tr>
-
-
-</tbody>
-
+    </tbody>
 
 </table>
-
 
 </template>

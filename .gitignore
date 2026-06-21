@@ -4,7 +4,6 @@
 
 node_modules/
 
-
 # =====================
 # Variables de entorno
 # =====================
@@ -12,14 +11,12 @@ node_modules/
 .env
 .env.*
 
-
 # =====================
 # Build Vue / Vite
 # =====================
 
 dist/
 dist-ssr/
-
 
 # =====================
 # Logs
@@ -31,14 +28,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # =====================
 # Editores
 # =====================
 
 .vscode/
 .idea/
-
 
 # =====================
 # Sistema

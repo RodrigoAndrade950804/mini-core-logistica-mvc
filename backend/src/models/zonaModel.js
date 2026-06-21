@@ -1,24 +1,17 @@
 import supabase from "../config/supabase.js";
 
+export const obtenerZonas = async () => {
 
-export const obtenerZonas = async()=>{
+    const { data, error } = await supabase
+        .from("zonas")
+        .select("*");
 
+    if (error) {
 
-const {data,error}= await supabase
+        throw error;
 
-.from("zonas")
+    }
 
-.select("*");
+    return data;
 
-
-if(error){
-
-throw error;
-
-}
-
-
-return data;
-
-
-}
+};
