@@ -184,7 +184,9 @@ El sistema realiza:
 3. Obtiene la tarifa por kilogramo correspondiente.
 4. Calcula el costo individual:
 
-![Fórmula](imgs/CostoEnvio.png)
+```
+Costo envío = peso_kg × tarifa_por_kg
+```
 
 5. Agrupa los resultados por repartidor.
 6. Muestra el detalle de cada envío y el resumen final.
@@ -455,9 +457,7 @@ Ejemplo:
 
 Netlify:
 
-```
 https://6a384e1d8223adf350e1250f--mini-core-logistica-frontend.netlify.app/
-```
 
 
 ## Backend
