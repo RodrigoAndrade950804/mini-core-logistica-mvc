@@ -132,15 +132,19 @@ Costo envío = peso_kg × tarifa_por_kg
 
 ## Tabla Repartidor
 
+<p align="left">
+<img src="imgs/Repartidor.png" align="right" width="300" alt="Tabla Dinámica"/>
+
 | Campo | Descripción |
 |-|-|
 | id_repartidor | Identificador único |     
 | nombre | Nombre del repartidor |
 | email | Correo |
-
-![Tabla Dinámica](imgs/Repartidor.png)
+</p>
+<br clear="left"/>
 
 ---
+
 
 ## Tabla Zonas
 
