@@ -306,7 +306,9 @@ La zona define la tarifa utilizada para calcular el costo.
 | `peso_kg` | `numeric` | Not Null |
 | `fecha_envio` | `date` | Not Null |
 
+---
 
+# Supabase
 ![BDD](imgs/BDD.png)
 
 ---
