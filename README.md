@@ -109,13 +109,13 @@ mini-core-logistica
 
 # Funcionamiento del sistema
 
-El usuario ingresa:
+**El usuario ingresa:**
 
 - Fecha inicio
 - Fecha fin
 
 
-El sistema realiza:
+**El sistema realiza:**
 
 1. Consulta los envíos realizados en el rango seleccionado.
 2. Obtiene la zona asociada al envío.
@@ -124,6 +124,7 @@ El sistema realiza:
 
 ![Fórmula](imgs/CostoEnvio.png)
 
+- Costo envío = peso_kg × tarifa_por_kg
 
 5. Agrupa los resultados por repartidor.
 
@@ -165,8 +166,133 @@ El sistema realiza:
 
 # Ejemplo de cálculo
 
-Envío:
+**Envío:**
 
 - Peso: 10 kg
 - Zona: Norte
 - Tarifa: $1.50/kg
+
+
+**Resultado:**
+
+- 10 × 1.50 = $15.00
+
+---
+
+# Instalación local
+
+## Clonar repositorio
+
+```bash
+git clone URL_DEL_REPOSITORIO
+```
+
+---
+
+## Backend
+
+**Ingresar al terminal backend:**
+- cd backend
+
+**Instalar dependencias:**
+- npm install
+
+**Crear archivo:**
+
+- .env
+
+**Dentro: **
+- SUPABASE_URL=
+- SUPABASE_KEY=
+
+**Ejecutar:**
+- npm run dev
+
+**Backend disponible:**
+- http://localhost:3000
+
+---
+
+## Frontend
+
+**Ingresar al terminal frontend:**
+- cd frontend
+
+**Instalar dependencias:**
+- npm install
+
+**Crear archivo:**
+- .env
+
+**Dentro:** 
+- VITE_API_URL=
+
+**Ejecutar:**
+- npm run dev
+
+**Backend disponible:**
+- http://localhost:5173
+
+---
+
+# Endpoints principales
+
+**Obtener reporte por fechas:**
+- Obtener reporte por fechas
+
+**Parámetros:**
+- fechaInicio
+- fechaFin
+
+**Ejemplo:**
+/api/envios/reporte?fechaInicio=2025-05-01&fechaFin=2025-05-31
+
+---
+
+# Deploys
+
+## Frontend
+
+**Netlify:**
+- 
+
+---
+
+## Backend
+
+**Render:**
+- 
+
+---
+
+## Base de datos
+
+**Supabase:**
+- 
+
+---
+
+# Video explicativo
+
+**Video de funcionamiento y explicación MVC:**
+- 
+
+---
+
+# Documentación utilizada
+
+**Express.js**
+- 
+
+**Vue.js**
+- 
+
+**Supabase**
+- 
+
+# Autor
+
+**Nombre:** Rodrigo Andrade
+
+**Correo Institucional:** rodrigo.andrade@udla.edu.ec
+
