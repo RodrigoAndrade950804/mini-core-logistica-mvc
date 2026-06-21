@@ -7,7 +7,9 @@ import envioRoutes from "./routes/envioRoutes.js";
 
 const app = express();
     
-app.use(cors());
+/*app.use(cors());*/ //Quitamos para deploys
+
+app.use(cors({origin:"*"})); // Permitir solicitudes desde cualquier origen
 
 app.use(express.json());
 
