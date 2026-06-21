@@ -1,21 +1,48 @@
-# Node
+# =====================
+# Dependencias Node
+# =====================
+
 node_modules/
+
+
+# =====================
+# Variables de entorno
+# =====================
+
 .env
+.env.*
 
 
-# Vue
+# =====================
+# Build Vue / Vite
+# =====================
+
 dist/
+dist-ssr/
 
 
+# =====================
 # Logs
+# =====================
+
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 
-# Editor
+# =====================
+# Editores
+# =====================
+
 .vscode/
+.idea/
 
 
+# =====================
 # Sistema
+# =====================
+
 .DS_Store
+Thumbs.db
