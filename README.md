@@ -132,10 +132,10 @@ Costo envío = peso_kg × tarifa_por_kg
 
 ## Tabla Repartidor
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%;">
+<div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: flex-start; gap: 30px; width: 100%;">
 
-<!-- COLUMNA 1: LA TABLA CON CONTENIDO CENTRADO Y SIN BORDES EXTERNOS -->
-<div style="flex: 1; max-width: 45%;">
+<!-- COLUMNA 1: LA TABLA DE TEXTO -->
+<div style="flex: 1; min-width: 300px;">
 
 | Campo | Descripción |
 | :---: | :---: |
@@ -145,16 +145,17 @@ Costo envío = peso_kg × tarifa_por_kg
 
 </div>
 
-<!-- COLUMNA 2: LA IMAGEN -->
-<div style="flex: 1; max-width: 45%;">
+<!-- COLUMNA 2: LA IMAGEN RESPONSIVA -->
+<div style="flex: 1; max-width: 350px;">
 
-![Tabla Dinámica](imgs/Repartidor.png)
+<img src="imgs/Repartidor.png" alt="Tabla Dinámica" style="max-width: 100%; height: auto; display: block; margin: 0;"/>
 
 </div>
 
 </div>
 
 ---
+
 
 
 
