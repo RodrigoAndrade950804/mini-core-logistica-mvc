@@ -132,31 +132,30 @@ Costo envío = peso_kg × tarifa_por_kg
 
 ## Tabla Repartidor
 
-<div align="center">
-<table border="0" style="border: none; background: transparent;">
-<tr>
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%;">
 
-<!-- COLUMNA 1: CONTROLAS LA TABLA DE TEXTO -->
-<td valign="top" width="45%" style="border: none; background: transparent; padding-right: 20px;">
+<!-- COLUMNA 1: LA TABLA CON CONTENIDO CENTRADO Y SIN BORDES EXTERNOS -->
+<div style="flex: 1; max-width: 45%;">
 
 | Campo | Descripción |
-|-|-|
+| :---: | :---: |
 | id_repartidor | Identificador único |     
 | nombre | Nombre del repartidor |
 | email | Correo |
 
-</td>
-
-<!-- COLUMNA 2: CONTROLAS LA IMAGEN -->
-<td valign="top" width="55%" style="border: none; background: transparent; padding-left: 20px;">
-
-<img src="imgs/Repartidor.png" width="340" alt="Tabla Dinámica" style="display: block; margin: 0;"/>
-
-</td>
-
-</tr>
-</table>
 </div>
+
+<!-- COLUMNA 2: LA IMAGEN -->
+<div style="flex: 1; max-width: 45%;">
+
+![Tabla Dinámica](imgs/Repartidor.png)
+
+</div>
+
+</div>
+
+---
+
 
 
 
