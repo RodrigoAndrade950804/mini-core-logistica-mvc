@@ -124,8 +124,6 @@ mini-core-logistica
 
 ![Fórmula](imgs/CostoEnvio.png)
 
-- Costo envío = peso_kg × tarifa_por_kg
-
 5. Agrupa los resultados por repartidor.
 
 ---
@@ -254,21 +252,21 @@ git clone URL_DEL_REPOSITORIO
 ## Frontend
 
 **Netlify:**
-- 
+- https://6a384e1d8223adf350e1250f--mini-core-logistica-frontend.netlify.app/
 
 ---
 
 ## Backend
 
 **Render:**
-- 
+- https://mini-core-logistica-backend.onrender.com
 
 ---
 
 ## Base de datos
 
 **Supabase:**
-- 
+- https://kchaeirkgdecdonwzvpn.supabase.co
 
 ---
 
@@ -282,13 +280,13 @@ git clone URL_DEL_REPOSITORIO
 # Documentación utilizada
 
 **Express.js**
-- 
+- https://expressjs.com/
 
 **Vue.js**
-- 
+- https://vuejs.org/
 
 **Supabase**
-- 
+- https://supabase.com/docs
 
 # Autor
 
