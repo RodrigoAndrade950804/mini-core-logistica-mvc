@@ -2,7 +2,7 @@
 
 Aplicación web desarrollada para resolver un problema de logística: calcular el costo total de envíos realizados por cada repartidor dentro de un rango de fechas, aplicando la tarifa por kilogramo definida según la zona de entrega.
 
-El proyecto demuestra la implementación del patrón arquitectónico MVC utilizando un backend con Node.js + Express.js y un frontend desarrollado con Vue 3.
+El proyecto implementa el patrón arquitectónico MVC utilizando un backend desarrollado con Node.js + Express.js y un frontend desarrollado con Vue 3.
 
 ---
 
@@ -34,28 +34,86 @@ El proyecto demuestra la implementación del patrón arquitectónico MVC utiliza
 
 # Arquitectura MVC
 
-El proyecto implementa una separación basada en MVC:
+El proyecto implementa una separación de responsabilidades basada en el patrón MVC:
 
+```
 Usuario
-|
-↓
-Vue (View)
-|
-↓
-Express Routes
-|
-↓
-Controller
-|
-↓
-Service
-|
-↓
-Models
-|
-↓
-Supabase PostgreSQL
 
+   ↓
+
+Vue (View)
+
+   ↓
+
+Express Routes
+
+   ↓
+
+Controller
+
+   ↓
+
+Service
+
+   ↓
+
+Models
+
+   ↓
+
+Supabase PostgreSQL
+```
+
+## Model
+
+Representa la capa encargada del acceso a datos.
+
+Responsabilidades:
+
+- Consultar información de repartidores.
+- Consultar envíos registrados.
+- Obtener zonas y tarifas.
+- Comunicarse con PostgreSQL mediante Supabase.
+
+
+## Controller
+
+Gestiona las solicitudes provenientes del frontend.
+
+Responsabilidades:
+
+- Recibir el rango de fechas.
+- Coordinar la ejecución de la lógica.
+- Retornar la respuesta al cliente.
+
+
+## Service
+
+Contiene la lógica principal del negocio.
+
+Responsabilidades:
+
+- Filtrar envíos por fecha.
+- Aplicar la fórmula de cálculo.
+- Agrupar resultados por repartidor.
+
+Fórmula aplicada:
+
+```
+Costo envío = peso_kg × tarifa_por_kg
+```
+
+
+## View
+
+Representa la interfaz desarrollada con Vue.
+
+Responsabilidades:
+
+- Capturar fechas ingresadas por el usuario.
+- Consumir la API.
+- Mostrar detalle de envíos.
+- Mostrar resumen por repartidor.
 
 ---
 
@@ -81,6 +139,7 @@ mini-core-logistica
 │     │  └─ envioRoutes.js
 │     └─ services
 │        └─ calculoCostoService.js
+│
 ├─ frontend
 │  ├─ index.html
 │  ├─ package-lock.json
@@ -99,103 +158,152 @@ mini-core-logistica
 │  │  └─ views
 │  │     └─ ReporteEnvios.vue
 │  └─ vite.config.js
+│
 ├─ imgs
-│  └─ Repartidor.png
+│  ├─ Repartidor.png
+│  ├─ CostoEnvio.png
+│  └─ BDD.png
+│
 └─ README.md
-
 ```
 
 ---
 
 # Funcionamiento del sistema
 
-**El usuario ingresa:**
+El usuario ingresa:
 
-- Fecha inicio
-- Fecha fin
+- Fecha inicio.
+- Fecha fin.
 
 
-**El sistema realiza:**
+El sistema realiza:
 
-1. Consulta los envíos realizados en el rango seleccionado.
-2. Obtiene la zona asociada al envío.
-3. Obtiene la tarifa por kilogramo.
-4. Calcula:
+1. Consulta los envíos realizados dentro del rango seleccionado.
+2. Obtiene la zona asociada a cada envío.
+3. Obtiene la tarifa por kilogramo correspondiente.
+4. Calcula el costo individual:
 
 ![Fórmula](imgs/CostoEnvio.png)
 
 5. Agrupa los resultados por repartidor.
+6. Muestra el detalle de cada envío y el resumen final.
 
 ---
 
 # Modelo de datos
 
-## Tabla Repartidor
+El sistema utiliza tres entidades principales:
 
-| Campo | Descripción |
-|-|-|
-| id_repartidor | Identificador único |
-| nombre | Nombre del repartidor |
-| email | Correo |
+- Repartidor
+- Zonas
+- Envíos
+
+
+## 🚚 Tabla `repartidor`
+
+Contiene la información de los repartidores registrados.
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id_repartidor` | INT (PK) | Identificador único del repartidor |
+| `nombre` | VARCHAR | Nombre completo del repartidor |
+| `email` | VARCHAR | Correo de contacto |
+
+
+---
+
+## 📍 Tabla `zonas`
+
+Contiene las zonas de entrega y sus tarifas.
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id_zona` | INT (PK) | Identificador único de la zona |
+| `nombre_zona` | VARCHAR | Nombre de la zona |
+| `tarifa_por_kg` | DECIMAL | Costo por kilogramo enviado |
+
 
 ---
 
-## Tabla Zonas
+## 📦 Tabla `envios`
 
-| Campo | Descripción |
-|-|-|
-| id_zona | Identificador zona |
-| nombre_zona | Zona de entrega |
-| tarifa_por_kg | Costo por kilogramo |
+Registra cada envío realizado.
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id_envio` | INT (PK) | Identificador del envío |
+| `id_repartidor` | INT (FK) | Repartidor asignado |
+| `id_zona` | INT (FK) | Zona de entrega |
+| `peso_kg` | DECIMAL | Peso del paquete |
+| `fecha_envio` | DATE | Fecha del envío |
+
+---
+
+# Relaciones entre tablas
+
+```
+repartidor
+
+    1
+
+    |
+
+    |
+
+    N
+
+envios
+
+    N
+
+    |
+
+    |
+
+    1
+
+zonas
+```
+
+Un repartidor puede tener múltiples envíos.
+
+Cada envío pertenece a una zona específica.
+
+La zona define la tarifa utilizada para calcular el costo.
 
 ---
 
-## Tabla Envios
+# Base de datos PostgreSQL - Supabase
 
-| Campo | Descripción |
-|-|-|
-| id_envio | Identificador envío |
-| id_repartidor | Repartidor asignado |
-| id_zona | Zona entrega |
-| peso_kg | Peso paquete |
-| fecha_envio | Fecha del envío |
+## Tabla `repartidor`
 
----
-## BDD
+| Columna | Tipo | Restricciones |
+|---|---|---|
+| `id_repartidor` | `int4` | Primary Key |
+| `nombre` | `varchar` | Not Null |
+| `email` | `varchar` | Nullable |
 
-## Table `repartidor`
 
-### Columns
+## Tabla `zonas`
 
-| Name | Type | Constraints |
-|------|------|-------------|
-| `id_repartidor` | `int4` | Primary |
-| `nombre` | `varchar` |  |
-| `email` | `varchar` |  Nullable |
+| Columna | Tipo | Restricciones |
+|---|---|---|
+| `id_zona` | `int4` | Primary Key |
+| `nombre_zona` | `varchar` | Not Null |
+| `tarifa_por_kg` | `numeric` | Not Null |
 
-## Table `zonas`
 
-### Columns
+## Tabla `envios`
 
-| Name | Type | Constraints |
-|------|------|-------------|
-| `id_zona` | `int4` | Primary |
-| `nombre_zona` | `varchar` |  |
-| `tarifa_por_kg` | `numeric` |  |
+| Columna | Tipo | Restricciones |
+|---|---|---|
+| `id_envio` | `int4` | Primary Key |
+| `id_repartidor` | `int4` | Foreign Key |
+| `id_zona` | `int4` | Foreign Key |
+| `peso_kg` | `numeric` | Not Null |
+| `fecha_envio` | `date` | Not Null |
 
-## Table `envios`
-
-### Columns
-
-| Name | Type | Constraints |
-|------|------|-------------|
-| `id_envio` | `int4` | Primary |
-| `id_repartidor` | `int4` |  |
-| `id_zona` | `int4` |  |
-| `peso_kg` | `numeric` |  |
-| `fecha_envio` | `date` |  |
-
----
 
 ![BDD](imgs/BDD.png)
 
@@ -203,16 +311,18 @@ mini-core-logistica
 
 # Ejemplo de cálculo
 
-**Envío:**
+Envío:
 
 - Peso: 10 kg
 - Zona: Norte
 - Tarifa: $1.50/kg
 
 
-**Resultado:**
+Resultado:
 
-- 10 × 1.50 = $15.00
+```
+10 × 1.50 = $15.00
+```
 
 ---
 
@@ -226,110 +336,174 @@ git clone URL_DEL_REPOSITORIO
 
 ---
 
-## Backend
+# Backend
 
-**Ingresar al terminal backend:**
-- cd backend
+Ingresar:
 
-**Instalar dependencias:**
-- npm install
+```bash
+cd backend
+```
 
-**Crear archivo:**
+Instalar dependencias:
 
-- .env
+```bash
+npm install
+```
 
-**Dentro:**
-- SUPABASE_URL=
-- SUPABASE_KEY=
+Crear archivo:
 
-**Ejecutar:**
-- npm run dev
+```
+.env
+```
 
-**Backend disponible:**
-- http://localhost:3000
+Agregar:
 
----
+```env
+SUPABASE_URL=
+SUPABASE_KEY=
+```
 
-## Frontend
+Ejecutar:
 
-**Ingresar al terminal frontend:**
-- cd frontend
+```bash
+npm run dev
+```
 
-**Instalar dependencias:**
-- npm install
+Backend:
 
-**Crear archivo:**
-- .env
-
-**Dentro:** 
-- VITE_API_URL=
-
-**Ejecutar:**
-- npm run dev
-
-**Backend disponible:**
-- http://localhost:5173
+```
+http://localhost:3000
+```
 
 ---
 
-# Endpoints principales
+# Frontend
 
-**Obtener reporte por fechas:**
-- Obtener reporte por fechas
+Ingresar:
 
-**Parámetros:**
-- fechaInicio
-- fechaFin
+```bash
+cd frontend
+```
 
-**Ejemplo:**
+Instalar dependencias:
+
+```bash
+npm install
+```
+
+Crear archivo:
+
+```
+.env
+```
+
+Agregar:
+
+```env
+VITE_API_URL=
+```
+
+Ejecutar:
+
+```bash
+npm run dev
+```
+
+Frontend:
+
+```
+http://localhost:5173
+```
+
+---
+
+# Endpoint principal
+
+## Reporte de envíos por rango de fechas
+
+Método:
+
+```
+GET
+```
+
+Endpoint:
+
+```
+/api/envios/reporte
+```
+
+Parámetros:
+
+```
+fechaInicio
+fechaFin
+```
+
+
+Ejemplo:
+
+```
 /api/envios/reporte?fechaInicio=2025-05-01&fechaFin=2025-05-31
+```
 
 ---
 
-# Deploys
+# Deploy
 
 ## Frontend
 
-**Netlify:**
-- https://6a384e1d8223adf350e1250f--mini-core-logistica-frontend.netlify.app/
+Netlify:
 
----
+https://6a384e1d8223adf350e1250f--mini-core-logistica-frontend.netlify.app/
+
 
 ## Backend
 
-**Render:**
-- https://mini-core-logistica-backend.onrender.com
+Render:
 
----
+https://mini-core-logistica-backend.onrender.com
+
 
 ## Base de datos
 
-**Supabase:**
-- https://kchaeirkgdecdonwzvpn.supabase.co
+Supabase:
+
+https://kchaeirkgdecdonwzvpn.supabase.co
 
 ---
 
 # Video explicativo
 
-**Video de funcionamiento y explicación MVC:**
-- 
+Video de funcionamiento y explicación del patrón MVC:
+
+- Pendiente de agregar
 
 ---
 
 # Documentación utilizada
 
-**Express.js**
-- https://expressjs.com/
+## Express.js
 
-**Vue.js**
-- https://vuejs.org/
+https://expressjs.com/
 
-**Supabase**
-- https://supabase.com/docs
+
+## Vue.js
+
+https://vuejs.org/
+
+
+## Supabase
+
+https://supabase.com/docs
+
+
+---
 
 # Autor
 
-**Nombre:** Rodrigo Andrade
+**Rodrigo Andrade**
 
-**Correo Institucional:** rodrigo.andrade@udla.edu.ec
+Correo institucional:
 
+rodrigo.andrade@udla.edu.ec
