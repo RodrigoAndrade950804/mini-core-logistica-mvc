@@ -99,10 +99,11 @@ mini-core-logistica
 │  │  └─ views
 │  │     └─ ReporteEnvios.vue
 │  └─ vite.config.js
+├─ imgs
+│  └─ Repartidor.png
 └─ README.md
 
 ```
-
 
 ---
 
@@ -121,7 +122,7 @@ El sistema realiza:
 3. Obtiene la tarifa por kilogramo.
 4. Calcula:
 
-Costo envío = peso_kg × tarifa_por_kg
+![Fórmula](imgs/CostoEnvio.png)
 
 
 5. Agrupa los resultados por repartidor.
@@ -132,37 +133,13 @@ Costo envío = peso_kg × tarifa_por_kg
 
 ## Tabla Repartidor
 
-<div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: flex-start; gap: 30px; width: 100%;">
-
-<!-- COLUMNA 1: LA TABLA DE TEXTO -->
-<div style="flex: 1; min-width: 300px;">
-
 | Campo | Descripción |
-| :---: | :---: |
-| id_repartidor | Identificador único |     
+|-|-|
+| id_repartidor | Identificador único |
 | nombre | Nombre del repartidor |
 | email | Correo |
 
-</div>
-
-<!-- COLUMNA 2: LA IMAGEN RESPONSIVA -->
-<div style="flex: 1; max-width: 350px;">
-
-<img src="imgs/Repartidor.png" alt="Tabla Dinámica" style="max-width: 100%; height: auto; display: block; margin: 0;"/>
-
-</div>
-
-</div>
-
 ---
-
-
-
-
-
-
-
-
 
 ## Tabla Zonas
 
@@ -193,19 +170,3 @@ Envío:
 - Peso: 10 kg
 - Zona: Norte
 - Tarifa: $1.50/kg
-
-
-Resultado:
-
-- 10 × 1.50 = $15.00
-
-
----
-
-# Instalación local
-
-## Clonar repositorio
-
-```bash
-git clone URL_DEL_REPOSITORIO
-
