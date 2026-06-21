@@ -161,6 +161,45 @@ mini-core-logistica
 | fecha_envio | Fecha del envío |
 
 ---
+## BDD
+
+## Table `repartidor`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id_repartidor` | `int4` | Primary |
+| `nombre` | `varchar` |  |
+| `email` | `varchar` |  Nullable |
+
+## Table `zonas`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id_zona` | `int4` | Primary |
+| `nombre_zona` | `varchar` |  |
+| `tarifa_por_kg` | `numeric` |  |
+
+## Table `envios`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id_envio` | `int4` | Primary |
+| `id_repartidor` | `int4` |  |
+| `id_zona` | `int4` |  |
+| `peso_kg` | `numeric` |  |
+| `fecha_envio` | `date` |  |
+
+---
+
+![BDD](imgs/BDD.png)
+
+---
 
 # Ejemplo de cálculo
 
