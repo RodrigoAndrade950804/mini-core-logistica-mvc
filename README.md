@@ -135,7 +135,9 @@ Costo envío = peso_kg × tarifa_por_kg
 <div align="center">
 <table border="0" style="border: none; background: transparent;">
 <tr>
-<td valign="top" style="border: none; background: transparent; padding-right: 30px;">
+
+<!-- COLUMNA 1: CONTROLAS LA TABLA DE TEXTO -->
+<td valign="top" width="45%" style="border: none; background: transparent; padding-right: 20px;">
 
 | Campo | Descripción |
 |-|-|
@@ -144,16 +146,18 @@ Costo envío = peso_kg × tarifa_por_kg
 | email | Correo |
 
 </td>
-<td valign="top" style="border: none; background: transparent;">
 
-<img src="imgs/Repartidor.png" width="320" alt="Tabla Dinámica" style="display: block; margin: 0;"/>
+<!-- COLUMNA 2: CONTROLAS LA IMAGEN -->
+<td valign="top" width="55%" style="border: none; background: transparent; padding-left: 20px;">
+
+<img src="imgs/Repartidor.png" width="340" alt="Tabla Dinámica" style="display: block; margin: 0;"/>
 
 </td>
+
 </tr>
 </table>
 </div>
 
----
 
 
 
