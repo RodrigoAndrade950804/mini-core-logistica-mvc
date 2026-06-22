@@ -26,6 +26,8 @@ export const calcularCostoEnvios = async (fechaInicio, fechaFin) => {
 
             repartidor: envio.repartidor.nombre,
 
+            email: envio.repartidor.email,
+
             fecha: envio.fecha_envio,
 
             zona: envio.zonas.nombre_zona,
@@ -49,6 +51,8 @@ export const calcularCostoEnvios = async (fechaInicio, fechaFin) => {
             resumen[nombre] = {
 
                 repartidor: nombre,
+
+                email: envio.repartidor.email,
 
                 cantidad_envios: 0,
 

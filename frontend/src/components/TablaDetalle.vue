@@ -21,6 +21,10 @@ defineProps({
             </th>
 
             <th class="border p-3">
+                Email
+            </th>
+
+            <th class="border p-3">
                 Fecha
             </th>
 
@@ -57,39 +61,31 @@ defineProps({
         >
 
             <td class="border p-3">
-
                 {{ item.repartidor }}
-
             </td>
 
             <td class="border p-3">
+                {{ item.email }}
+            </td>
 
+            <td class="border p-3">
                 {{ item.fecha }}
-
             </td>
 
             <td class="border p-3">
-
                 {{ item.zona }}
-
             </td>
 
             <td class="border p-3">
-
                 {{ item.peso_kg }} kg
-
             </td>
 
             <td class="border p-3">
-
                 ${{ item.tarifa_por_kg.toFixed(2) }}
-
             </td>
 
             <td class="border p-3 font-bold">
-
                 ${{ item.costo_envio.toFixed(2) }}
-
             </td>
 
         </tr>

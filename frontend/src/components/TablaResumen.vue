@@ -19,6 +19,10 @@ defineProps({
       </th>
 
       <th class="border p-3">
+        Email
+      </th>
+
+      <th class="border p-3">
         Cantidad envíos
       </th>
 
@@ -44,6 +48,10 @@ defineProps({
 
       <td class="border p-3">
         {{ item.repartidor }}
+      </td>
+
+      <td class="border p-3">
+        {{ item.email }}
       </td>
 
       <td class="border p-3">

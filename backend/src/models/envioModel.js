@@ -13,7 +13,8 @@ export const obtenerEnviosPorFecha = async (fechaInicio, fechaFin) => {
 
             repartidor(
                 id_repartidor,
-                nombre
+                nombre,
+                email
             ),
 
             zonas(
