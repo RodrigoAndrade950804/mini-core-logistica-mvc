@@ -459,7 +459,7 @@ Ejemplo:
 
 Netlify:
 
-https://6a384e1d8223adf350e1250f--mini-core-logistica-frontend.netlify.app/
+https://6a38b2d7362133b7ea93fe9b--mini-core-logistica-frontend.netlify.app/
 
 
 ## Backend
