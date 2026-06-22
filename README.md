@@ -481,7 +481,7 @@ https://kchaeirkgdecdonwzvpn.supabase.co
 
 Video de funcionamiento y explicación del patrón MVC:
 
-- Pendiente de agregar
+- https://youtu.be/pUC-FQ6K2cc
 
 ---
 
